@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.14.37012.4 d17.14
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infromation Chanal Safety", "Infromation Chanal Safety.csproj", "{C5501E52-3EFC-44B3-A6EC-919DD4326590}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C5501E52-3EFC-44B3-A6EC-919DD4326590}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C5501E52-3EFC-44B3-A6EC-919DD4326590}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C5501E52-3EFC-44B3-A6EC-919DD4326590}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C5501E52-3EFC-44B3-A6EC-919DD4326590}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {31B426B6-44F9-471C-8E62-BCD89F8B2843}
+	EndGlobalSection
+EndGlobal
