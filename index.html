@@ -1,0 +1,578 @@
+@page "/"
+@rendermode InteractiveServer
+
+<div class="app-viewport">
+    <div class="mobile-container">
+        @if (currentStep == 1)
+        {
+            <div class="screen welcome-screen" @onclick="NextStep">
+                <div class="white-border-frame">
+                    <div class="center-content">
+                        <h1 class="main-title">Information channel Safety</h1>
+                        <h2 class="sub-title">ช่องทางการติดต่อแผนกเซฟตี้</h2>
+                        <div class="blink-hint">แตะเพื่อดำเนินการต่อ</div>
+                    </div>
+                </div>
+            </div>
+        }
+        else if (currentStep == 2)
+        {
+            <div class="screen welcome-screen">
+                <div class="white-border-frame">
+                    <div class="menu-layout">
+                        <div class="header-selection">
+                            <h2 class="title-white">เลือกช่องทางการติดต่อ</h2>
+                            <p class="subtitle-white">Choose Contact Channel</p>
+                        </div>
+
+                        <div class="btn-stack">
+                            <div class="glow-border-box" @onclick='() => ShowList("WG")'>
+                                <div class="moving-glow"></div>
+                                <div class="inner-btn">
+                                    <span class="static-text">WG</span>
+                                </div>
+                            </div>
+
+                            <div class="glow-border-box" @onclick='() => ShowList("BP")'>
+                                <div class="moving-glow"></div>
+                                <div class="inner-btn">
+                                    <span class="static-text">BP</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <button class="minimal-back-btn" @onclick="() => currentStep = 1">ย้อนกลับ (Back)</button>
+                    </div>
+                </div>
+            </div>
+        }
+        else if (currentStep == 3)
+        {
+            <div class="screen list-screen">
+                <div class="nav-header">
+                    <button class="back-btn" @onclick="GoBack">BACK</button>
+                    <span class="header-name">CONTACT: @selectedGroup</span>
+                </div>
+                <div class="scroll-list">
+                    @foreach (var p in people)
+                    {
+                        <div class="safety-card">
+                            <div class="avatar-part">
+                                <img src="@p.Img" class="img-circle" />
+                            </div>
+                            <div class="content-part">
+                                <div class="white-data">
+                                    @* แสดงแค่ Area และ ชื่อ *@
+                                    <p style="font-size: 12px; color: #666;"><b>Area:</b> @p.Area</p>
+                                    <p style="font-size: 14px; font-weight: 700;">@p.Name</p>
+                                    <p style="font-size: 12px; color: #0284c7; font-weight: 500;">
+                                        <i class="fa-solid fa-envelope" style="font-size: 10px;"></i> @p.Email
+                                    </p>
+                                </div>
+                                <div class="action-grid">
+                                    @* ปุ่มโทรยังทำงานได้ปกติโดยใช้ข้อมูลจาก p.Tel แม้จะไม่โชว์เบอร์ *@
+                                    <a href="tel:@p.Tel" class="btn-call">
+                                        <i class="fa-solid fa-phone-volume fa-shake"></i> 📞
+                                    </a>
+                                    <a href="https://line.me/ti/p/~@p.Line" class="btn-line">LINE</a>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+@code {
+    private int currentStep = 1;
+    private string selectedGroup = "";
+    private List<User> people = new();
+
+    private void NextStep() => currentStep = 2;
+    private void GoBack() => currentStep = 2;
+
+    private void ShowList(string group)
+    {
+        selectedGroup = group;
+
+        if (group == "WG")
+        {
+            people = new List<User> {
+                new User {
+                    Name = "Suratchada Chumsuk",
+                    Area = "Safety Head3",
+                    Tel = "0817345742",
+                    Line = "Katent.c",
+                    Email = "Suratchada.Chum@deltaww.com",
+                    Img = "KT.jpg"
+                },
+                  new User {
+                    Name = "Sitthichai Somda",
+                    Area = "Safety Head4",
+                    Tel = "0830146697",
+                    Line = "0830146697",
+                    Email = "Sitthichai.So@deltaww.com",
+                    Img = "tum.png"
+                },
+                new User {
+                    Name = "Chalasin Pakdeesuwan",
+                    Area = "Safety WG1",
+                    Tel = "0918576814",
+                    Line = "cchalasinn",
+                    Email = "chapakde@deltaww.com",
+                    Img = "Buum.jpg"
+                },
+                new User {
+                    Name = "Lalipat Keratiwareechat",
+                    Area = "Safety Chi-Huang",
+                    Tel = "0874488236",
+                    Line = "0874488236",
+                    Email = "lalkerat@deltaww.com",
+                    Img = "Nutty.jpeg"
+                },
+                new User {
+                    Name = "Kansuda Rungkon",
+                    Area = "Safety WG5",
+                    Tel = "0824420841",
+                    Line = "530473",
+                    Email = "kanrungk@deltaww.com",
+                    Img = "Kansuda.png"
+                },
+                new User {
+                    Name = "Surasak Sankham",
+                    Area = "Safety WG1/WG5",
+                    Tel = "0817345742",
+                    Line = "0817345742",
+                    Email = "Surasak.sa@deltaww.com",
+                    Img = "Tee.png"
+                },
+                new User {
+                    Name = "Sasithorn Banlueasap",
+                    Area = "Safety WG2",
+                    Tel = "0935507593",
+                    Line = "0935507593",
+                    Email = "sasbanlu@deltaww.com",
+                    Img = "BowSasi.png"
+                },
+                new User {
+                    Name = "Katesaraporn Keandee",
+                    Area = "Safety WG2/WG3",
+                    Tel = "0929466967",
+                    Line = "gate_2522",
+                    Email = "Katesaraporn.Kean@deltaww.com",
+                    Img = "Kate.png"
+                },
+                new User {
+                    Name = "Nuntiya Siwaphonsakun",
+                    Area = "Safety WG3",
+                    Tel = "0828856489",
+                    Line = "0917375266",
+                    Email = "nunsiwap@deltaww.com",
+                    Img = "Sandy..jpeg"
+                },
+            };
+        }
+        else
+        {
+            people = new List<User> {
+                new User {
+                    Name = "Yonlada Khunburan",
+                    Area = "Safety Head2",
+                    Tel = "0921426554",
+                    Line = "-",
+                    Email = "yonkhunb@deltaww.com",
+                    Img = "beer.png"
+                },
+                new User {
+                    Name = "Wirin Thisomboon",
+                    Area = "Safety Head1",
+                    Tel = "0824822738",
+                    Line = "natty_w",
+                    Email = "Wirin.This@deltaww.com",
+                    Img = "Wirin.jpg"
+                },
+                new User {
+                    Name = "Arinyawan Sukjit",
+                    Area = "Safety DET31",
+                    Tel = "0807246797",
+                    Line = "0807246797",
+                    Email = "arisukji@deltaww.com",
+                    Img = "Bow.png"
+                },
+                new User {
+                    Name = "Nongmuk Sritanakorn",
+                    Area = "Safety DET3",
+                    Tel = "0931286163",
+                    Line = "Numuk-43",
+                    Email = "nonsrita@deltaww.com",
+                    Img = "Nongmuk.Png"
+                },
+                new User {
+                    Name = "Thosaporn Thongkamkao",
+                    Area = "Safety DET3/WH",
+                    Tel = "0808892552",
+                    Line = "thosaporn.thon",
+                    Email = "Thosaporn.Thon@deltaww.com",
+                    Img = "Ya.Png"
+                },
+                 new User {
+                    Name = "Raweewan Thepharak",
+                    Area = "Safety Turbon/WH1",
+                    Tel = "0645622846",
+                    Line = "friendshipp_555",
+                    Email = "rawtheph@deltaww.com",
+                    Img = "Teaw.Png"
+                },
+                new User {
+                    Name = "Thodsapon Yordkwiean", 
+                    Area = "Safety DET3",
+                    Tel = "0863885631",
+                    Line = "aon031991",
+                    Email = "Thodsapon.Yord@deltaww.com",
+                    Img = "Aon.Png"
+                },
+                new User {
+                    Name = "Chutinun Suttrupai",
+                    Area = "Safety WH External",
+                    Tel = "0615451512",
+                    Line = "pra1103",
+                    Email = "Chutinun.Sutt@deltaww.com",
+                    Img = "PAR.jpg"
+                },
+                new User {
+                    Name = "Panuvit Jitkla",
+                    Area = "Safety BP2",
+                    Tel = "0955593889",
+                    Line = "name_panuvit",
+                    Email = "panjitkl@deltaww.com",
+                    Img = "Name.jpg"
+                },
+                new User {
+                    Name = "Pagagoon Loongcome",
+                    Area = "Safety BP3",
+                    Tel = "0863272755",
+                    Line = "pagagoon",
+                    Email = "pagloong@deltaww.com",
+                    Img = "goon.jpg"
+                },
+                 new User {
+                    Name = "Sudarat Khusai",
+                    Area = "Safety BP1",
+                    Tel = "0980615838",
+                    Line = "2258523",
+                    Email = "sudkhusa@deltaww.com",
+                    Img = "Beem.jpg"
+                },
+                 new User {
+                    Name = "Nasrinee Mamah", 
+                    Area = "Safety BP5",
+                    Tel = "0968814883",
+                    Line = "supernut.t",
+                    Email = "nasmamah@deltaww.com",
+                    Img = "Nut.png"
+                },
+                 new User {
+                    Name = "Kanokporn Panruansaen",
+                    Area = "Safety BP5-RD1",
+                    Tel = "0625163044",
+                    Line = "2901461111",
+                    Email = "kanpanru@deltaww.com",
+                    Img = "Ann.png"
+                },
+                new User {
+                    Name = "Hataichanok Saeteaw",
+                    Area = "Safety BP9",
+                    Tel = "0830739040",
+                    Line = "-",
+                    Email = "hatsaete@deltaww.com",
+                    Img = "bell.jpg"
+                },
+            };
+        }
+
+        // *** เพิ่มบรรทัดนี้เพื่อให้หน้าจอเปลี่ยนจากหน้า 2 ไปหน้า 3 ***
+        currentStep = 3;
+    }
+
+    public class User
+    {
+        public string? Name { get; set; }
+        public string? Tel { get; set; }
+        public string? Line { get; set; }
+        public string? Area { get; set; }
+        public string? Img { get; set; }
+        public string? Email { get; set; }
+    }
+}
+<style>
+    .app-viewport {
+        display: flex;
+        justify-content: center;
+        background: #1e293b;
+        min-height: 100vh;
+        padding: 10px;
+        font-family: sans-serif;
+    }
+
+    .mobile-container {
+        width: 360px;
+        height: 640px;
+        background: white;
+        border-radius: 20px;
+        overflow: hidden;
+        position: relative;
+    }
+
+    .screen {
+        height: 100%;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .welcome-screen {
+        background: #34b3ff;
+        padding: 15px;
+        cursor: pointer;
+    }
+
+    .white-border-frame {
+        border: 2px solid white;
+        height: 100%;
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+    }
+
+    .center-content {
+        text-align: center;
+    }
+
+    .main-title {
+        color: white;
+        font-size: 20px;
+        font-weight: 700;
+    }
+
+    .sub-title {
+        color: white;
+        font-size: 14px;
+        margin-top: 8px;
+    }
+
+    .blink-hint {
+        color: white;
+        margin-top: 50px;
+        font-size: 10px;
+        animation: blinker 2s infinite;
+    }
+
+    .menu-layout {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        padding: 50px 20px;
+        text-align: center;
+    }
+
+    .title-white {
+        color: white;
+        font-size: 18px;
+        font-weight: 700;
+        margin: 0;
+    }
+
+    .subtitle-white {
+        color: white;
+        font-size: 11px;
+        opacity: 0.8;
+    }
+
+    .btn-stack {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        gap: 25px;
+        align-items: center;
+    }
+
+    /* ปุ่มแบบมีมิติกรอบวิ่ง */
+    .glow-border-box {
+        position: relative;
+        width: 220px;
+        height: 80px;
+        background: rgba(255, 255, 255, 0.15);
+        border-radius: 15px;
+        overflow: hidden;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .moving-glow {
+        position: absolute;
+        width: 150px;
+        height: 200%;
+        background: linear-gradient(#fbbf24, #fff8b5);
+        animation: rotateGlow 5s linear infinite;
+        filter: blur(15px);
+    }
+
+    .inner-btn {
+        position: absolute;
+        inset: 3px;
+        background: #34b3ff;
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 2;
+    }
+
+    .static-text {
+        color: white;
+        font-size: 28px;
+        font-weight: 900;
+    }
+
+    .minimal-back-btn {
+        background: none;
+        border: none;
+        color: white;
+        font-size: 12px;
+        text-decoration: underline;
+        cursor: pointer;
+        margin-top: 20px;
+    }
+
+    /* หน้า 3 */
+    .list-screen {
+        background: #f0f9ff;
+    }
+
+    .nav-header {
+        background: #34b3ff;
+        padding: 12px;
+        color: white;
+        display: flex;
+        align-items: center;
+    }
+
+    .back-btn {
+        background: rgba(255,255,255,0.2);
+        border: 1px solid white;
+        color: white;
+        padding: 4px 10px;
+        border-radius: 5px;
+        font-size: 10px;
+    }
+
+    .header-name {
+        margin-left: 15px;
+        font-weight: 700;
+        font-size: 14px;
+    }
+
+    .scroll-list {
+        flex: 1;
+        overflow-y: auto;
+        padding: 15px;
+    }
+
+    .safety-card {
+        background: white;
+        border-radius: 15px;
+        padding: 12px;
+        margin-bottom: 15px;
+        display: flex;
+        align-items: center;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    }
+
+    .img-circle {
+        width: 65px;
+        height: 65px;
+        border-radius: 50%;
+        border: 2px solid #34b3ff;
+    }
+
+    .content-part {
+        flex: 1;
+        padding-left: 15px;
+    }
+
+    .white-data p {
+        margin: 2px 0; /* จัดระเบียบระยะห่างบรรทัด */
+    }
+
+    .action-grid {
+        display: flex;
+        gap: 10px;
+    }
+    .btn-call, .btn-line {
+        flex: 1;
+        text-align: center;
+        padding: 8px;
+        border-radius: 6px;
+        font-size: 12px;
+        font-weight: 700;
+        text-decoration: none;
+        color: white;
+    }
+    .btn-call {
+        background: #0284c7;
+        color: white;
+        padding: 6px;
+        border-radius: 6px;
+        text-decoration: none;
+        font-size: 10px;
+        text-align: center;
+        flex: 1;
+    }
+
+    .btn-line {
+        background: #22c55e;
+        color: white;
+        padding: 6px;
+        border-radius: 6px;
+        text-decoration: none;
+        font-size: 10px;
+        text-align: center;
+        flex: 1;
+    }
+
+    .btn-email {
+        background: #64748b; 
+        color: white;
+        padding: 6px;
+        border-radius: 6px;
+        text-decoration: none;
+        font-size: 10px;
+        text-align: center;
+        flex: 1;
+    }
+
+    /* แก้ไขตรงนี้: ใส่ @@ สองตัว */
+    @@keyframes blinker {
+        50% {
+            opacity: 0;
+        }
+    }
+
+    @@keyframes rotateGlow {
+        0% {
+            transform: rotate(0deg);
+        }
+
+        100% {
+            transform: rotate(360deg);
+        }
+    }
+</style>
