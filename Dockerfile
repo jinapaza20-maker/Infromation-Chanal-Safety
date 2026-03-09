@@ -14,4 +14,4 @@ WORKDIR /app
 COPY --from=build /app .
 
 # คำสั่งรัน (ตรวจสอบชื่อไฟล์ .dll ให้ตรงเป๊ะ)
-ENTRYPOINT ["dotnet", "Infromation Chanal Safety.dll"]
+ENTRYPOINT ["dotnet", "Infromation_Chanal_Safety.dll"]
