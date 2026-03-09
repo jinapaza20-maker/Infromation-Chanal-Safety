@@ -289,34 +289,60 @@
     }
 
     .action-grid {
-        display: flex;
-        gap: 8px;
+        display: grid; /* เปลี่ยนจาก flex */
+        grid-template-columns: 1fr 1fr; /* แบ่ง 2 ฝั่งให้เท่ากันเป๊ะ */
+        gap: 10px; /* ระยะห่างระหว่างปุ่ม */
         margin-top: 8px;
+        width: 100%; /* ให้แผงปุ่มขยายเต็มการ์ด */
     }
 
+    .btn-call, .btn-line {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 10px 5px; /* เพิ่มพื้นที่กดให้ง่ายขึ้น */
+        border-radius: 8px;
+        text-decoration: none;
+        font-size: 13px; /* ปรับขนาดฟอนต์ให้พอดี */
+        font-weight: bold;
+        color: white;
+        width: 100%; /* ให้ปุ่มกว้างเต็มช่องที่แบ่งไว้ */
+    }
+
+    /* ใส่สีแยกกันเหมือนเดิม */
     .btn-call {
         background: #0284c7;
-        color: white;
-        padding: 8px;
-        border-radius: 6px;
-        text-decoration: none;
-        flex: 1;
-        text-align: center;
-        font-size: 12px;
-        font-weight: bold;
     }
 
     .btn-line {
         background: #22c55e;
-        color: white;
-        padding: 8px;
-        border-radius: 6px;
-        text-decoration: none;
-        flex: 1;
-        text-align: center;
-        font-size: 12px;
-        font-weight: bold;
     }
+
+    .content-part {
+        padding: 0 15px; /* เว้นระยะจากขอบซ้ายขวา 15px */
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        flex: 1; /* ให้ยืดเต็มพื้นที่ระหว่างรูปภาพกับปุ่ม */
+        text-align: left; /* จัดข้อความชิดซ้ายให้เป็นระเบียบ */
+    }
+
+    .btn-back {
+        background: transparent !important; /* ลบพื้นหลังสีขาวออก */
+        border: 1px solid rgba(255, 255, 255, 0.5) !important; /* ใส่เส้นขอบจางๆ ให้รู้ว่าเป็นปุ่ม */
+        color: white !important; /* เปลี่ยนตัวหนังสือเป็นสีขาว */
+        padding: 5px 15px !important;
+        border-radius: 20px !important; /* ทำปุ่มให้โค้งมนดูทันสมัย */
+        font-size: 14px !important;
+        cursor: pointer;
+        display: inline-flex;
+        align-items: center;
+        text-decoration: none;
+    }
+
+        .btn-back:hover {
+            background: rgba(255, 255, 255, 0.2) !important; /* เวลาเอาเมาส์วางให้มีไฮไลท์นิดนึง */
+        }
 
     @@keyframes blinker {
         50% {
@@ -340,4 +366,5 @@
             max-width: 280px;
         }
     }
+
 </style>
