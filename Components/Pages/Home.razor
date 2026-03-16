@@ -69,8 +69,10 @@
                                     </p>
                                 </div>
                                 <div class="action-grid">
-                                    <a href="tel:@p.Tel" class="btn-call">📞 CALL</a>
-                                    <a href="https://line.me/ti/p/~@p.Line" class="btn-line">LINE</a>
+                                    <a href="tel:@p.Tel" class="btn-call"><i class="fa-solid fa-phone"></i> CALL</a>
+                                    <a href="@GetLineLink(p.Line)" target="_blank" class="btn-line">
+                                        <i class="fa-brands fa-line"></i> LINE
+                                    </a>
                                 </div>
                             </div>
                         </div>
@@ -81,7 +83,22 @@
     </div>
 </div>
 
-@code {
+    @code {
+    // ฟังก์ชันสำหรับเช็คว่าต้องส่งลิงก์แบบไหนออกไป
+    private string GetLineLink(string lineData)
+    {
+        if (string.IsNullOrEmpty(lineData)) return "#";
+
+        // ถ้าข้อมูลขึ้นต้นด้วย http แสดงว่าเป็นลิงก์ QR มาอยู่แล้ว ให้ใช้ได้เลย
+        if (lineData.StartsWith("http"))
+        {
+            return lineData;
+        }
+
+        // ถ้าไม่ใช่ลิงก์ (เป็นไอดีปกติ) ให้เติมตัวนำหน้าให้
+        return $"https://line.me/ti/p/~{lineData}";
+    }
+
     private int currentStep = 1;
     private string selectedGroup = "";
     private List<User> people = new();
